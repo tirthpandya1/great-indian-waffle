@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 
 /**
  * Card component for displaying content in a card-like container
@@ -39,11 +39,16 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 0,
   },
-  elevated: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-  },
+  elevated: Platform.select({
+    web: {
+      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    },
+    default: {
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 2,
+    },
+  }),
 });

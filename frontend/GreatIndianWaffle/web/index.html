@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Great Indian Waffle</title>
+  <style>
+    html, body, #root {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    #error-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: red;
+      color: white;
+      padding: 10px;
+      z-index: 1000;
+      display: none;
+    }
+    body {
+      background-color: #F5FCFF;
+    }
+  </style>
+</head>
+<body>
+  <div id="error-overlay"></div>
+  <div id="root" style="height: 100%; width: 100%;"></div>
+  <script>
+    window.addEventListener('error', function(event) {
+      const errorOverlay = document.getElementById('error-overlay');
+      errorOverlay.textContent = `Error: ${event.message} at ${event.filename}:${event.lineno}`;
+      errorOverlay.style.display = 'block';
+      console.error('Uncaught error:', event);
+    });
+
+    window.addEventListener('unhandledrejection', function(event) {
+      const errorOverlay = document.getElementById('error-overlay');
+      errorOverlay.textContent = `Unhandled Promise Rejection: ${event.reason}`;
+      errorOverlay.style.display = 'block';
+      console.error('Unhandled promise rejection:', event);
+    });
+  </script>
+</body>
+</html>
